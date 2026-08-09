@@ -1,0 +1,24 @@
+﻿# Python virtual environment (yours is at project root)
+.venv/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+
+# Backend
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.pyc
+backend/.env
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/instance/
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

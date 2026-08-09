@@ -1,0 +1,183 @@
+:root{
+  --bg: #201720;
+  --bg-alt: #291d29;
+  --card: #2c1f2c;
+  --card-hover: #33253a;
+  --rose: #C98A93;
+  --rose-soft: #E4C3C7;
+  --gold: #C9A768;
+  --cream: #F3EAE2;
+  --muted: #B7A3AE;
+  --line: rgba(243,234,226,0.10);
+  --line-strong: rgba(243,234,226,0.14);
+  --good: #8FAE7C;
+  --good-bg: rgba(143,174,124,0.12);
+  --warn: #E0B25C;
+  --warn-bg: rgba(224,178,92,0.12);
+  --bad: #D9827E;
+  --bad-bg: rgba(217,130,126,0.12);
+  --radius: 2px;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ overflow-x:hidden; }
+body{
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Manrope', sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+h1,h2,h3{ font-family:'Fraunces', serif; font-weight:500; letter-spacing:0.01em; }
+a{ color:inherit; text-decoration:none; }
+img{ max-width:100%; display:block; }
+button{ font-family:inherit; }
+input, select, textarea{ max-width:100%; }
+
+.wrap{ max-width:1200px; margin:0 auto; padding:0 32px; }
+@media (max-width:640px){ .wrap{ padding:0 16px; } }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:11px 24px; font-size:13px; letter-spacing:0.04em; text-transform:uppercase;
+  border-radius:var(--radius); cursor:pointer; border:1px solid transparent;
+  transition:all .2s; font-weight:700; min-height:44px;
+}
+.btn-primary{ background:var(--rose); color:#241522; }
+.btn-primary:hover{ background:var(--rose-soft); }
+.btn-ghost{ border-color:var(--line-strong); color:var(--cream); background:transparent; }
+.btn-ghost:hover{ border-color:var(--gold); color:var(--gold); }
+.btn:disabled{ opacity:0.5; cursor:not-allowed; }
+
+.field{ margin-bottom:16px; }
+.field label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
+.field input, .field select, .field textarea{
+  width:100%; background:var(--card); border:1px solid var(--line-strong); color:var(--cream);
+  padding:12px 13px; font-size:16px; border-radius:var(--radius); font-family:'Manrope',sans-serif;
+}
+/* font-size:16px on inputs is deliberate — anything smaller triggers an
+   automatic zoom-in on focus in Safari/iOS, which is a jarring mobile bug */
+.field input:focus, .field select:focus, .field textarea:focus{ outline:none; border-color:var(--gold); }
+.field-row{ display:flex; gap:12px; }
+.field-row .field{ flex:1; }
+@media (max-width:480px){ .field-row{ flex-direction:column; gap:0; } }
+
+.error-banner{
+  background: var(--bad-bg); color: var(--bad); border:1px solid rgba(217,130,126,0.3);
+  padding:12px 16px; border-radius:var(--radius); font-size:13px; margin-bottom:16px;
+}
+
+.spinner{
+  width:20px; height:20px; border:2px solid var(--line-strong); border-top-color: var(--rose);
+  border-radius:50%; animation: spin .7s linear infinite;
+}
+@keyframes spin{ to{ transform: rotate(360deg); } }
+
+.loading-page{ display:flex; align-items:center; justify-content:center; min-height:60vh; }
+
+/* ============ RESPONSIVE LAYOUT SYSTEM ============
+   Use these classes instead of inline gridTemplateColumns/flex for any
+   layout that needs to change shape on mobile — inline styles can't hold
+   media queries, so anything responsive has to live here. */
+
+/* Product grids: 4 → 2 → 1 */
+.grid-4{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+@media (max-width:960px){ .grid-4{ grid-template-columns:repeat(2,1fr); gap:16px; } }
+@media (max-width:520px){ .grid-4{ grid-template-columns:1fr; gap:14px; } }
+
+/* Journal/blog grids: 3 → 2 → 1 */
+.grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+@media (max-width:900px){ .grid-3{ grid-template-columns:repeat(2,1fr); gap:16px; } }
+@media (max-width:560px){ .grid-3{ grid-template-columns:1fr; gap:14px; } }
+
+/* Category shortcuts: 5 → 3 → 2 */
+.grid-5{ display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
+@media (max-width:800px){ .grid-5{ grid-template-columns:repeat(3,1fr); } }
+@media (max-width:480px){ .grid-5{ grid-template-columns:repeat(2,1fr); gap:10px; } }
+
+/* 3-up feature/stat rows: 3 → 1 */
+.grid-3-feature{ display:grid; grid-template-columns:repeat(3,1fr); gap:40px; }
+@media (max-width:800px){ .grid-3-feature{ grid-template-columns:1fr; gap:28px; } }
+
+/* Main content + fixed sidebar (Cart, Checkout, Admin forms): stacks on tablet down */
+.layout-sidebar{ display:grid; grid-template-columns:1fr 360px; gap:24px; align-items:start; }
+@media (max-width:900px){ .layout-sidebar{ grid-template-columns:1fr; } }
+
+/* Split hero / two-panel layouts: stacks on tablet down */
+.layout-split{ display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+@media (max-width:800px){ .layout-split{ grid-template-columns:1fr; gap:28px; } }
+
+/* Admin stat cards: 4 → 2 */
+.grid-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+@media (max-width:700px){ .grid-stats{ grid-template-columns:repeat(2,1fr); gap:10px; } }
+
+/* Tables that would otherwise blow out the page width on mobile: scroll
+   sideways within their own box instead of pushing the whole layout wide */
+.table-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.table-scroll table{ min-width:640px; }
+
+/* Horizontal scrolling rails (Top Selling, New Arrivals): already flex-based,
+   this just improves mobile touch scrolling and hides ugly scrollbars */
+.rail-scroll{ scrollbar-width:thin; -webkit-overflow-scrolling:touch; }
+
+/* Tap targets — anything clickable should be at least 40px on mobile */
+@media (max-width:640px){
+  .tap-target{ min-width:40px; min-height:40px; }
+}
+
+/* ============ NAVBAR ============ */
+.nav-links-desktop{ display:flex; gap:32px; align-items:center; }
+.nav-hamburger{ display:none; }
+@media (max-width:860px){
+  .nav-links-desktop{ display:none; }
+  .nav-hamburger{ display:flex; }
+}
+
+.nav-desktop-only{ display:flex; align-items:center; }
+@media (max-width:860px){ .nav-desktop-only{ display:none; } }
+
+.mobile-menu-overlay{
+  position:fixed; inset:0; top:76px; background:rgba(15,10,15,0.6);
+  z-index:90; backdrop-filter:blur(2px);
+}
+.mobile-menu-panel{
+  position:fixed; top:76px; left:0; right:0; z-index:95;
+  background:var(--bg-alt); border-bottom:1px solid var(--line);
+  max-height:calc(100vh - 76px); overflow-y:auto;
+  padding:8px 0 20px;
+}
+.mobile-menu-panel a, .mobile-menu-panel .mobile-menu-item{
+  display:flex; align-items:center; padding:16px 20px; font-size:15px;
+  border-bottom:1px solid var(--line); min-height:44px;
+}
+
+/* Sticky order-summary sidebars: only sticky when there's room beside the
+   main content — once .layout-sidebar stacks on mobile, sticky positioning
+   looks broken (a "floating" box mid-scroll), so it's turned off there. */
+.sidebar-card{
+  background: var(--card); border:1px solid var(--line); border-radius:8px;
+  padding:24px; position:sticky; top:96px; height:fit-content;
+}
+@media (max-width:900px){
+  .sidebar-card{ position:static; }
+}
+
+/* Cart / order line items: thumbnail + name flex naturally, qty+price group
+   drops to its own row under a divider once the screen gets too narrow to
+   fit everything on one line without squeezing the product name unreadably */
+.line-item-row{ display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+.line-item-info{ flex:1 1 140px; min-width:140px; }
+.line-item-actions{ display:flex; align-items:center; gap:16px; margin-left:auto; }
+@media (max-width:480px){
+  .line-item-actions{ margin-left:0; width:100%; justify-content:space-between; padding-top:12px; border-top:1px solid var(--line); }
+}
+
+/* Two-column breakdown cards (category/payment stats in Admin): stack on mobile */
+.grid-2-stack{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media (max-width:700px){ .grid-2-stack{ grid-template-columns:1fr; } }
+
+/* Short label/value pairs (rider delivery details): stay 2-col until truly tiny */
+.grid-2-tight{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media (max-width:380px){ .grid-2-tight{ grid-template-columns:1fr; } }
