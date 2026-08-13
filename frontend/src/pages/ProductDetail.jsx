@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { api } from "../api/client";
+import { resolveImageUrl } from "../api/client";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { useDelivery } from "../context/DeliveryContext";
@@ -107,7 +108,7 @@ export default function ProductDetail() {
           border: "1px solid var(--line)", overflow: "hidden"
         }}>
           {product.image_url ? (
-            <img src={product.image_url} alt={product.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img src={resolveImageUrl(product.image_url)} alt={product.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           ) : (
             <svg viewBox="0 0 24 24" fill="none" stroke="#E4C3C7" strokeWidth="1.1" width="120" height="120">
               <path d="M12 21c-4-2.6-8-6-8-10.4A4.6 4.6 0 0112 6a4.6 4.6 0 018 4.6C20 15 16 18.4 12 21z" />

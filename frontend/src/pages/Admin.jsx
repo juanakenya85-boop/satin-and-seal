@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import { api } from "../api/client";
+import { resolveImageUrl } from "../api/client";
 
 const emptyForm = { name: "", category_id: "", description: "", price: "", quantity: "", is_new: false };
 const emptyBlogForm = { title: "", excerpt: "", content: "", author: "Satin & Seal Team", is_published: true };
@@ -97,7 +98,7 @@ export default function Admin() {
       quantity: product.quantity,
       is_new: product.is_new,
     });
-    setImagePreview(product.image_url || null);
+    setImagePreview(product.image_url ? resolveImageUrl(product.image_url) : null);
     setImageFile(null);
   }
 
@@ -187,7 +188,7 @@ export default function Admin() {
       author: post.author,
       is_published: post.is_published,
     });
-    setBlogCoverPreview(post.cover_image_url || null);
+    setBlogCoverPreview(post.cover_image_url ? resolveImageUrl(post.cover_image_url) : null);
     setBlogCoverFile(null);
   }
 
@@ -516,7 +517,7 @@ export default function Admin() {
                       <td style={{ padding: "14px 20px", borderBottom: "1px solid var(--line)" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                           <div style={{ width: 36, height: 36, borderRadius: 6, overflow: "hidden", flexShrink: 0, background: "var(--bg-alt)" }}>
-                            {p.image_url && <img src={p.image_url} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />}
+                            {p.image_url && <img src={resolveImageUrl(p.image_url)} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />}
                           </div>
                           <div>
                             <div style={{ fontWeight: 600, fontSize: 13.5 }}>{p.name}</div>
@@ -602,7 +603,7 @@ export default function Admin() {
                 <div key={p.id} style={{ background: "var(--card)", border: "1px solid var(--line)", borderRadius: 12, padding: 18, display: "flex", gap: 14, alignItems: "center" }}>
                   <div style={{ width: 56, height: 56, borderRadius: 8, overflow: "hidden", flexShrink: 0, background: "var(--bg-alt)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     {p.cover_image_url ? (
-                      <img src={p.cover_image_url} alt={p.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                      <img src={resolveImageUrl(p.cover_image_url)} alt={p.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     ) : (
                       <svg viewBox="0 0 24 24" fill="none" stroke="var(--muted)" strokeWidth="1.3" width="20" height="20"><path d="M4 6h16M4 12h16M4 18h10" /></svg>
                     )}

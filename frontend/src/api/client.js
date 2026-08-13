@@ -1,4 +1,18 @@
-const BASE_URL = "/api";
+// In local dev, VITE_API_BASE is unset, so this stays "/api" and Vite's dev
+// proxy (vite.config.js) forwards it to localhost:5000. In production, set
+// VITE_API_BASE to your deployed backend's full URL (e.g. Render's URL) —
+// see the deployment README section.
+const API_ROOT = import.meta.env.VITE_API_BASE || "";
+const BASE_URL = `${API_ROOT}/api`;
+
+// Uploaded product/blog photos are served from the backend at /uploads/...
+// image_url values from the API are already relative paths like
+// "/uploads/product-3-abc123.png" — this turns them into a full URL that
+// actually resolves once the frontend and backend aren't on the same host.
+export function resolveImageUrl(path) {
+  if (!path) return path;
+  return `${API_ROOT}${path}`;
+}
 
 function getToken() {
   return localStorage.getItem("ss_token");

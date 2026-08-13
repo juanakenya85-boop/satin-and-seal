@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { api } from "../api/client";
+import { resolveImageUrl } from "../api/client";
 
 export default function Journal() {
   const [posts, setPosts] = useState([]);
@@ -36,7 +37,7 @@ export default function Journal() {
               }}>
                 <div style={{ height: 160, background: post.cover_image_url ? undefined : "linear-gradient(155deg,#3a2540,#241a2a)", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
                   {post.cover_image_url ? (
-                    <img src={post.cover_image_url} alt={post.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    <img src={resolveImageUrl(post.cover_image_url)} alt={post.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   ) : (
                     <svg viewBox="0 0 24 24" fill="none" stroke="#E4C3C7" strokeWidth="1.2" width="36" height="36">
                       <path d="M4 6h16M4 12h16M4 18h10" />

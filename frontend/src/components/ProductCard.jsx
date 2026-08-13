@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import { resolveImageUrl } from "../api/client";
 
 export default function ProductCard({ product, onAdd, badge, saved, onToggleSave }) {
   return (
     <div className="p-card">
       <Link to={`/product/${product.id}`} className="p-media" style={{ background: product.image_url ? undefined : "linear-gradient(155deg,#3a2540,#241a2a)" }}>
         {product.image_url ? (
-          <img src={product.image_url} alt={product.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          <img src={resolveImageUrl(product.image_url)} alt={product.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         ) : (
           <svg viewBox="0 0 24 24" fill="none" stroke="#E4C3C7" strokeWidth="1.3" width="48" height="48">
             <path d="M12 21c-4-2.6-8-6-8-10.4A4.6 4.6 0 0112 6a4.6 4.6 0 018 4.6C20 15 16 18.4 12 21z" />

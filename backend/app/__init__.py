@@ -22,7 +22,9 @@ def create_app():
     db.init_app(app)
     jwt.init_app(app)
     bcrypt.init_app(app)
-    cors.init_app(app, resources={r"/api/*": {"origins": "*"}})
+    allowed_origins = os.getenv("CORS_ORIGINS", "*")
+    origins_list = [o.strip() for o in allowed_origins.split(",")] if allowed_origins != "*" else "*"
+    cors.init_app(app, resources={r"/api/*": {"origins": origins_list}})
 
     from .auth.routes import auth_bp
     from .products.routes import products_bp
