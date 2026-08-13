@@ -44,7 +44,12 @@ def create_app():
 
     @app.get("/api/health")
     def health():
-        return {"status": "ok"}
+        try:
+            from sqlalchemy import text
+            db.session.execute(text("SELECT 1"))
+            return {"status": "ok", "database": "connected"}
+        except Exception as e:
+            return {"status": "error", "database": "disconnected", "message": str(e)}, 500
 
     @app.get("/api/delivery-rates")
     def delivery_rates():
