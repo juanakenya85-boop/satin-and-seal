@@ -1,14 +1,11 @@
 from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from werkzeug.utils import secure_filename
-import os
 import uuid
 from ..extensions import db
 from ..models import BlogPost, User
+from ..utils.cloudinary_upload import upload_image, UploadError
 
 blog_bp = Blueprint("blog", __name__)
-
-ALLOWED_IMAGE_EXTENSIONS = {"png", "jpg", "jpeg", "webp"}
 
 
 def _require_admin():
@@ -123,17 +120,16 @@ def upload_cover_image(post_id):
     if "image" not in request.files:
         return jsonify({"error": "No image file provided"}), 400
     file = request.files["image"]
-    if file.filename == "":
-        return jsonify({"error": "No image file selected"}), 400
 
-    ext = file.filename.rsplit(".", 1)[-1].lower() if "." in file.filename else ""
-    if ext not in ALLOWED_IMAGE_EXTENSIONS:
-        return jsonify({"error": "Image must be png, jpg, jpeg, or webp"}), 400
+    try:
+        image_url = upload_image(
+            file,
+            folder="satin-and-seal/blog",
+            public_id_prefix=f"blog-{post_id}-{uuid.uuid4().hex[:8]}",
+        )
+    except UploadError as e:
+        return jsonify({"error": str(e)}), 400
 
-    filename = secure_filename(f"blog-{post_id}-{uuid.uuid4().hex[:8]}.{ext}")
-    filepath = os.path.join(current_app.config["UPLOAD_FOLDER"], filename)
-    file.save(filepath)
-
-    post.cover_image_url = f"/uploads/{filename}"
+    post.cover_image_url = image_url
     db.session.commit()
     return jsonify(post.to_dict(full=True))
