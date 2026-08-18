@@ -1,22 +1,28 @@
 :root{
-  --bg: #201720;
-  --bg-alt: #291d29;
-  --card: #2c1f2c;
-  --card-hover: #33253a;
-  --rose: #C98A93;
-  --rose-soft: #E4C3C7;
-  --gold: #C9A768;
-  --cream: #F3EAE2;
-  --muted: #B7A3AE;
-  --line: rgba(243,234,226,0.10);
-  --line-strong: rgba(243,234,226,0.14);
-  --good: #8FAE7C;
-  --good-bg: rgba(143,174,124,0.12);
-  --warn: #E0B25C;
-  --warn-bg: rgba(224,178,92,0.12);
-  --bad: #D9827E;
-  --bad-bg: rgba(217,130,126,0.12);
-  --radius: 2px;
+  /* Pleasure Pop — bright, playful, warm-cream base with hot pink,
+     sunny yellow, and grape purple as the "pop" accents. Variable names
+     kept the same as the old dark palette on purpose, so every component
+     that references var(--rose)/var(--gold)/var(--cream) etc. re-skins
+     automatically without needing per-component edits. */
+  --bg: #FFF6EF;
+  --bg-alt: #FFEADD;
+  --card: #FFFFFF;
+  --card-hover: #FFF1E6;
+  --rose: #FF3E7F;
+  --rose-soft: #FF8FB3;
+  --gold: #FFC845;
+  --cream: #2B1B3D;
+  --muted: #8B7A94;
+  --line: rgba(43,27,61,0.10);
+  --line-strong: rgba(43,27,61,0.16);
+  --good: #2FAE6B;
+  --good-bg: rgba(47,174,107,0.12);
+  --warn: #E8940C;
+  --warn-bg: rgba(232,148,12,0.12);
+  --bad: #E8425C;
+  --bad-bg: rgba(232,66,92,0.12);
+  --purple: #7B3FF2;
+  --radius: 10px;
 }
 
 *{ box-sizing:border-box; margin:0; padding:0; }

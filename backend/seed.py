@@ -72,7 +72,7 @@ Here's the good news: it doesn't have to be a big event. Some of the most useful
 **Discretion is not the same as secrecy.** Wanting privacy around what you order, what you own, or what you're curious about is completely normal — it doesn't mean you're hiding something shameful. That's part of why we ship everything in plain packaging: what you explore together is your business, and ours is just making sure it arrives safely.
 
 If there's one thing worth taking from all of this: the couples who talk about it easily aren't the ones who never feel awkward. They're the ones who've simply had the conversation enough times that the awkwardness stopped being the point.""",
-        author="Satin & Seal Team",
+        author="Pleasure Pop Team",
         is_published=True,
     )
 
@@ -97,7 +97,7 @@ Here's a simpler way to think about it.
 **Read the product page, not just the photo.** Look for clear language about materials, charging, water resistance, and noise level. If a listing is vague on all four, treat that as useful information in itself.
 
 Whatever you choose, remember that a first purchase is just that — a first one. It doesn't need to be the only one, or the "right" one forever. It just needs to be a reasonable, well-informed place to start.""",
-        author="Satin & Seal Team",
+        author="Pleasure Pop Team",
         is_published=True,
     )
 
@@ -120,7 +120,7 @@ Whatever you choose, remember that a first purchase is just that — a first one
 **Replace, don't push through.** If a product's surface becomes tacky, discolored, or starts to smell different than usual, that's a sign it's time to replace it — not a sign to keep going. This is about your health, not about getting extra mileage out of a purchase.
 
 None of this is complicated once it's a habit. It just has to become one.""",
-        author="Satin & Seal Team",
+        author="Pleasure Pop Team",
         is_published=True,
     )
 

@@ -47,8 +47,8 @@ export default function ResetPassword() {
       <div style={{ width: "100%", maxWidth: 400 }}>
 
         <div style={{ display: "flex", alignItems: "center", gap: 10, justifyContent: "center", marginBottom: 32 }}>
-          <div style={{ width: 32, height: 32, borderRadius: "50%", background: "var(--bg-alt)", border: "1px solid var(--gold)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Fraunces, serif", fontStyle: "italic", fontSize: 16 }}>S</div>
-          <div style={{ fontFamily: "Fraunces, serif", fontSize: 19, fontWeight: 600 }}>Satin <em style={{ color: "var(--rose-soft)", fontStyle: "italic", fontWeight: 400 }}>& Seal</em></div>
+          <div style={{ width: 32, height: 32, borderRadius: "50%", background: "var(--bg-alt)", border: "1px solid var(--gold)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Fraunces, serif", fontStyle: "italic", fontSize: 16 }}>P</div>
+          <div style={{ fontFamily: "Fraunces, serif", fontSize: 19, fontWeight: 600 }}>Pleasure <em style={{ color: "var(--rose-soft)", fontStyle: "italic", fontWeight: 400 }}>Pop</em></div>
         </div>
 
         <h1 style={{ fontSize: 22, marginBottom: 8 }}>Choose a new password</h1>

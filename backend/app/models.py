@@ -151,7 +151,8 @@ class Order(db.Model):
     __tablename__ = "orders"
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)  # null = guest order
+    guest_email = db.Column(db.String(120), nullable=True)  # only set for guest orders
     full_name = db.Column(db.String(120), nullable=False)
     phone = db.Column(db.String(20), nullable=False)
     city = db.Column(db.String(80), nullable=False)
@@ -185,6 +186,8 @@ class Order(db.Model):
             "payment_method": self.payment_method,
             "payment_status": self.payment_status,
             "created_at": self.created_at.isoformat(),
+            "is_guest": self.user_id is None,
+            "guest_email": self.guest_email,
             "items": [i.to_dict() for i in self.items],
             "address": {
                 "full_name": self.full_name,
@@ -293,7 +296,7 @@ class BlogPost(db.Model):
     excerpt = db.Column(db.String(300), nullable=False)
     content = db.Column(db.Text, nullable=False)
     cover_image_url = db.Column(db.String(500), nullable=True)
-    author = db.Column(db.String(120), default="Satin & Seal Team")
+    author = db.Column(db.String(120), default="Pleasure Pop Team")
     is_published = db.Column(db.Boolean, default=True)
     published_at = db.Column(db.DateTime, default=datetime.utcnow)
 

@@ -4,7 +4,7 @@ import { api } from "../api/client";
 import { resolveImageUrl } from "../api/client";
 
 const emptyForm = { name: "", category_id: "", description: "", price: "", quantity: "", is_new: false };
-const emptyBlogForm = { title: "", excerpt: "", content: "", author: "Satin & Seal Team", is_published: true };
+const emptyBlogForm = { title: "", excerpt: "", content: "", author: "Pleasure Pop Team", is_published: true };
 
 export default function Admin() {
   const [tab, setTab] = useState("products"); // 'products' | 'orders' | 'reviews' | 'blog'

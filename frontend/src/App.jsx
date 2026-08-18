@@ -17,6 +17,7 @@ import Checkout from "./pages/Checkout";
 import Account from "./pages/Account";
 import Admin from "./pages/Admin";
 import Rider from "./pages/Rider";
+import OrderConfirmation from "./pages/OrderConfirmation";
 
 function RequireAuth({ children }) {
   const { user, loading } = useAuth();
@@ -24,6 +25,17 @@ function RequireAuth({ children }) {
   if (!user) return <Navigate to="/login" replace />;
   if (user.is_admin) return <Navigate to="/admin" replace />;
   if (user.is_rider) return <Navigate to="/rider" replace />;
+  return children;
+}
+
+// For pages guests are allowed on (cart, checkout) — staff accounts still
+// shouldn't be shopping from their own admin/rider login, but no login is
+// required at all otherwise.
+function KeepStaffAway({ children }) {
+  const { user, loading } = useAuth();
+  if (loading) return <div className="loading-page"><div className="spinner" /></div>;
+  if (user?.is_admin) return <Navigate to="/admin" replace />;
+  if (user?.is_rider) return <Navigate to="/rider" replace />;
   return children;
 }
 
@@ -59,8 +71,9 @@ export default function App() {
               <Route path="/journal" element={<Journal />} />
               <Route path="/journal/:slug" element={<BlogPost />} />
               <Route path="/wishlist" element={<RequireAuth><Wishlist /></RequireAuth>} />
-              <Route path="/cart" element={<RequireAuth><Cart /></RequireAuth>} />
-              <Route path="/checkout" element={<RequireAuth><Checkout /></RequireAuth>} />
+              <Route path="/cart" element={<KeepStaffAway><Cart /></KeepStaffAway>} />
+              <Route path="/checkout" element={<KeepStaffAway><Checkout /></KeepStaffAway>} />
+              <Route path="/order-confirmation/:orderId" element={<OrderConfirmation />} />
               <Route path="/account" element={<RequireAuth><Account /></RequireAuth>} />
               <Route path="/admin" element={<RequireAdmin><Admin /></RequireAdmin>} />
               <Route path="/rider" element={<RequireRider><Rider /></RequireRider>} />

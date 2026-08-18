@@ -20,7 +20,7 @@ export default function Landing() {
       <section style={{ paddingTop: 110, paddingBottom: 90, textAlign: "center", position: "relative", overflow: "hidden" }}>
         <div style={{
           position: "absolute", inset: 0, pointerEvents: "none",
-          background: "radial-gradient(ellipse 700px 500px at 78% 10%, rgba(201,167,104,0.10), transparent 60%), radial-gradient(ellipse 600px 500px at 10% 90%, rgba(201,138,147,0.10), transparent 60%)"
+          background: "radial-gradient(ellipse 700px 500px at 78% 10%, rgba(255,200,69,0.10), transparent 60%), radial-gradient(ellipse 600px 500px at 10% 90%, rgba(255,62,127,0.10), transparent 60%)"
         }} />
         <div className="wrap" style={{ position: "relative" }}>
           <div style={{ fontSize: 12, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 20 }}>
@@ -100,8 +100,8 @@ export default function Landing() {
                 background: "var(--card)", border: "1px solid var(--line)", borderRadius: 8, overflow: "hidden",
                 display: "block", transition: "transform .2s, border-color .2s"
               }}>
-                <div style={{ height: 140, background: "linear-gradient(155deg,#3a2540,#241a2a)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#E4C3C7" strokeWidth="1.2" width="34" height="34">
+                <div style={{ height: 140, background: "linear-gradient(155deg,#FF6FA5,#7B3FF2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="1.2" width="34" height="34">
                     <path d="M4 6h16M4 12h16M4 18h10" />
                   </svg>
                 </div>
@@ -128,7 +128,7 @@ export default function Landing() {
       </section>
 
       <footer style={{ borderTop: "1px solid var(--line)", padding: "36px 0", textAlign: "center", fontSize: 12.5, color: "var(--muted)" }}>
-        &copy; 2026 Satin &amp; Seal, Nairobi. 18+ only.
+        &copy; 2026 Pleasure Pop, Nairobi. 18+ only.
       </footer>
     </div>
   );

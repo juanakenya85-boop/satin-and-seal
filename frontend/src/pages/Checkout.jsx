@@ -1,19 +1,21 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { useCart } from "../context/CartContext";
 import { useDelivery } from "../context/DeliveryContext";
+import { useAuth } from "../context/AuthContext";
 import { api } from "../api/client";
 
 export default function Checkout() {
-  const { items, subtotal, refresh } = useCart();
+  const { items, subtotal, refresh, clearGuestCart, isGuest } = useCart();
   const { nairobi_fee, outside_fee } = useDelivery();
+  const { user } = useAuth();
   const routerLocation = useLocation();
   const navigate = useNavigate();
 
   const [deliveryLocation] = useState(routerLocation.state?.location || "nairobi");
   const [paymentMethod, setPaymentMethod] = useState("mpesa");
-  const [form, setForm] = useState({ full_name: "", phone: "", city: "Nairobi", address_line: "", notes: "" });
+  const [form, setForm] = useState({ full_name: "", phone: "", email: "", city: "Nairobi", address_line: "", notes: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -30,15 +32,34 @@ export default function Checkout() {
       setError("Please fill in your name, phone, and delivery address.");
       return;
     }
+    if (isGuest && !form.email) {
+      setError("Please add your email so we can send your order confirmation.");
+      return;
+    }
+
     setLoading(true);
     try {
-      const order = await api.checkout({
-        ...form,
-        delivery_location: deliveryLocation,
-        payment_method: paymentMethod,
-      });
-      await refresh();
-      navigate("/account", { state: { justOrdered: order.id, paymentNote: order.payment_note } });
+      let order;
+      if (user) {
+        order = await api.checkout({
+          ...form,
+          delivery_location: deliveryLocation,
+          payment_method: paymentMethod,
+        });
+        await refresh();
+        navigate("/account", { state: { justOrdered: order.id, paymentNote: order.payment_note } });
+      } else {
+        order = await api.guestCheckout({
+          ...form,
+          delivery_location: deliveryLocation,
+          payment_method: paymentMethod,
+          items: items.map((i) => ({ product_id: i.product.id, quantity: i.quantity })),
+        });
+        clearGuestCart();
+        navigate(`/order-confirmation/${order.id}?email=${encodeURIComponent(form.email)}`, {
+          state: { order, paymentNote: order.payment_note },
+        });
+      }
     } catch (e) {
       setError(e.message);
     } finally {
@@ -51,6 +72,11 @@ export default function Checkout() {
       <Navbar />
       <div className="wrap" style={{ paddingTop: 44, paddingBottom: 30 }}>
         <h1 style={{ fontSize: "clamp(26px,3vw,34px)" }}>Checkout</h1>
+        {isGuest && (
+          <p style={{ fontSize: 13, color: "var(--muted)", marginTop: 8 }}>
+            Checking out as a guest. <Link to="/login" style={{ color: "var(--gold)" }}>Log in</Link> if you'd rather track this order from an account.
+          </p>
+        )}
       </div>
 
       <div className="wrap layout-sidebar" style={{ paddingBottom: 80 }}>
@@ -64,10 +90,13 @@ export default function Checkout() {
               <div className="field"><label>Phone number</label><input value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="07•• ••• •••" /></div>
               <div className="field"><label>City / Town</label><input value={form.city} onChange={(e) => set("city", e.target.value)} /></div>
             </div>
+            {isGuest && (
+              <div className="field"><label>Email</label><input type="email" value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="you@email.com" /></div>
+            )}
             <div className="field"><label>Delivery address</label><input value={form.address_line} onChange={(e) => set("address_line", e.target.value)} placeholder="Street, building, apartment number" /></div>
             <div className="field"><label>Delivery notes (optional)</label><input value={form.notes} onChange={(e) => set("notes", e.target.value)} placeholder="Gate code, landmark, preferred time" /></div>
             <div style={{ display: "flex", gap: 10, background: "var(--bg-alt)", border: "1px solid var(--line)", borderRadius: 2, padding: "13px 15px", fontSize: 12, color: "var(--muted)" }}>
-              Your parcel will arrive in plain packaging with no branding, sent from "S&S Nairobi."
+              Your parcel will arrive in plain packaging with no branding, sent from "Pleasure Pop."
             </div>
           </div>
 
@@ -112,7 +141,7 @@ function PayOption({ label, sub, active, onClick }) {
     <div onClick={onClick} style={{
       display: "flex", alignItems: "center", gap: 14, padding: "14px 16px",
       border: `1px solid ${active ? "var(--rose)" : "var(--line)"}`, borderRadius: 2, marginBottom: 10, cursor: "pointer",
-      background: active ? "rgba(201,138,147,0.06)" : "transparent"
+      background: active ? "rgba(255,62,127,0.06)" : "transparent"
     }}>
       <div style={{ width: 16, height: 16, borderRadius: "50%", border: `1.5px solid ${active ? "var(--rose)" : "var(--line)"}`, position: "relative", flexShrink: 0 }}>
         {active && <div style={{ position: "absolute", inset: 3, borderRadius: "50%", background: "var(--rose)" }} />}

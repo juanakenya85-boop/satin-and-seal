@@ -1,4 +1,4 @@
-# Satin & Seal — MVP Scaffold
+# Pleasure Pop — MVP Scaffold
 
 A working full-stack scaffold for the discreet online shop: **Flask + MySQL** backend,
 **React (Vite)** frontend. Implements every screen we mocked up — landing (with
@@ -39,7 +39,7 @@ pip install -r requirements.txt
 Create the database in MySQL:
 
 ```sql
-CREATE DATABASE satin_and_seal CHARACTER SET utf8mb4;
+CREATE DATABASE pleasure_pop CHARACTER SET utf8mb4;
 ```
 
 **Your `.env` is already filled in** with the database credentials you gave us —

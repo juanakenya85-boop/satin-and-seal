@@ -4,11 +4,11 @@ import { resolveImageUrl } from "../api/client";
 export default function ProductCard({ product, onAdd, badge, saved, onToggleSave }) {
   return (
     <div className="p-card">
-      <Link to={`/product/${product.id}`} className="p-media" style={{ background: product.image_url ? undefined : "linear-gradient(155deg,#3a2540,#241a2a)" }}>
+      <Link to={`/product/${product.id}`} className="p-media" style={{ background: product.image_url ? undefined : "linear-gradient(155deg,#FF6FA5,#7B3FF2)" }}>
         {product.image_url ? (
           <img src={resolveImageUrl(product.image_url)} alt={product.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         ) : (
-          <svg viewBox="0 0 24 24" fill="none" stroke="#E4C3C7" strokeWidth="1.3" width="48" height="48">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="1.3" width="48" height="48">
             <path d="M12 21c-4-2.6-8-6-8-10.4A4.6 4.6 0 0112 6a4.6 4.6 0 018 4.6C20 15 16 18.4 12 21z" />
           </svg>
         )}
@@ -48,10 +48,10 @@ export default function ProductCard({ product, onAdd, badge, saved, onToggleSave
 
       <style>{`
         .p-card{ background:var(--card); border:1px solid var(--line); border-radius:2px; overflow:hidden; transition:transform .25s, border-color .25s; position:relative; }
-        .p-card:hover{ transform:translateY(-4px); border-color:rgba(201,167,104,0.35); }
+        .p-card:hover{ transform:translateY(-4px); border-color:rgba(255,200,69,0.35); }
         .p-media{ height:180px; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; }
-        .p-badge{ position:absolute; top:12px; left:12px; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; padding:5px 10px; border-radius:999px; background:rgba(32,23,32,0.75); color:var(--gold); border:1px solid rgba(201,167,104,0.35); }
-        .p-badge-low{ color:var(--rose-soft); border-color:rgba(201,138,147,0.4); }
+        .p-badge{ position:absolute; top:12px; left:12px; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; padding:5px 10px; border-radius:999px; background:rgba(32,23,32,0.75); color:var(--gold); border:1px solid rgba(255,200,69,0.35); }
+        .p-badge-low{ color:var(--rose-soft); border-color:rgba(255,62,127,0.4); }
         .p-save{ position:absolute; top:10px; right:10px; width:30px; height:30px; border-radius:50%; background:rgba(32,23,32,0.7); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--rose-soft); transition:all .15s; }
         .p-save:hover{ border-color:var(--rose); }
         .p-body{ padding:16px 16px 18px; }

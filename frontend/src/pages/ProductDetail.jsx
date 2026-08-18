@@ -36,12 +36,8 @@ export default function ProductDetail() {
   }, [id]);
 
   async function handleAdd() {
-    if (!user) {
-      navigate("/login");
-      return;
-    }
     try {
-      await addItem(product.id, qty);
+      await addItem(product, qty);
       setAdded(true);
     } catch (e) {
       setError(e.message);
@@ -104,13 +100,13 @@ export default function ProductDetail() {
 
         <div style={{
           borderRadius: 12, minHeight: 420, display: "flex", alignItems: "center", justifyContent: "center",
-          background: product.image_url ? undefined : "linear-gradient(155deg,#3a2540,#241a2a)",
+          background: product.image_url ? undefined : "linear-gradient(155deg,#FF6FA5,#7B3FF2)",
           border: "1px solid var(--line)", overflow: "hidden"
         }}>
           {product.image_url ? (
             <img src={resolveImageUrl(product.image_url)} alt={product.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           ) : (
-            <svg viewBox="0 0 24 24" fill="none" stroke="#E4C3C7" strokeWidth="1.1" width="120" height="120">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="1.1" width="120" height="120">
               <path d="M12 21c-4-2.6-8-6-8-10.4A4.6 4.6 0 0112 6a4.6 4.6 0 018 4.6C20 15 16 18.4 12 21z" />
             </svg>
           )}

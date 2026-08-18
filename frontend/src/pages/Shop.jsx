@@ -50,12 +50,8 @@ export default function Shop() {
   }
 
   async function handleAdd(product) {
-    if (!user) {
-      navigate("/login");
-      return;
-    }
     try {
-      await addItem(product.id, 1);
+      await addItem(product, 1);
     } catch (e) {
       setError(e.message);
     }
@@ -133,7 +129,7 @@ export default function Shop() {
       </section>
 
       <footer style={{ borderTop: "1px solid var(--line)", padding: "32px 0", textAlign: "center", fontSize: 12.5, color: "var(--muted)" }}>
-        &copy; 2026 Satin & Seal, Nairobi. 18+ only.
+        &copy; 2026 Pleasure Pop, Nairobi. 18+ only.
       </footer>
     </div>
   );
@@ -147,7 +143,7 @@ function Chip({ label, active, onClick }) {
         padding: "9px 18px", fontSize: 13, borderRadius: 999, cursor: "pointer",
         border: `1px solid ${active ? "var(--rose)" : "var(--line)"}`,
         color: active ? "var(--rose-soft)" : "var(--muted)",
-        background: active ? "rgba(201,138,147,0.08)" : "transparent",
+        background: active ? "rgba(255,62,127,0.08)" : "transparent",
       }}
     >{label}</div>
   );
@@ -159,7 +155,7 @@ function Rail({ title, tag, products, onAdd, rank, badge, wishlistIds, onToggleS
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 22 }}>
         <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
           <h2 style={{ fontSize: 22 }}>{title}</h2>
-          <span style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.06em", color: "var(--gold)", border: "1px solid rgba(201,167,104,0.3)", padding: "4px 10px", borderRadius: 999 }}>{tag}</span>
+          <span style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.06em", color: "var(--gold)", border: "1px solid rgba(255,200,69,0.3)", padding: "4px 10px", borderRadius: 999 }}>{tag}</span>
         </div>
       </div>
       <div style={{ display: "flex", gap: 20, overflowX: "auto", paddingBottom: 8 }}>

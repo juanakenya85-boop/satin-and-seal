@@ -12,6 +12,7 @@ export default function Navbar({ active }) {
   const menuRef = useRef(null);
 
   const isCustomer = user && !user.is_admin && !user.is_rider;
+  const isStaff = user?.is_admin || user?.is_rider;
 
   function initials(name) {
     if (!name) return "?";
@@ -41,7 +42,7 @@ export default function Navbar({ active }) {
 
   return (
     <header style={{
-      position: "sticky", top: 0, zIndex: 50, background: "rgba(32,23,32,0.92)",
+      position: "sticky", top: 0, zIndex: 50, background: "rgba(255,246,239,0.92)",
       backdropFilter: "blur(10px)", borderBottom: "1px solid var(--line)"
     }}>
       <nav className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 76 }}>
@@ -51,9 +52,9 @@ export default function Navbar({ active }) {
             border: "1px solid var(--gold)", display: "flex", alignItems: "center",
             justifyContent: "center", fontFamily: "Fraunces, serif", fontStyle: "italic",
             fontWeight: 500, fontSize: 16, flexShrink: 0
-          }}>S</div>
+          }}>P</div>
           <div style={{ fontFamily: "Fraunces, serif", fontSize: 18, fontWeight: 600, whiteSpace: "nowrap" }}>
-            Satin <em style={{ fontStyle: "italic", color: "var(--rose-soft)", fontWeight: 400 }}>& Seal</em>
+            Pleasure <em style={{ fontStyle: "italic", color: "var(--rose-soft)", fontWeight: 400 }}>Pop</em>
           </div>
         </Link>
 
@@ -67,7 +68,7 @@ export default function Navbar({ active }) {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 16, flexShrink: 0 }}>
-          {isCustomer && (
+          {!isStaff && (
             <Link to="/cart" onClick={closeMobileMenu} className="tap-target" style={{ position: "relative", width: 22, height: 22, display: "flex", alignItems: "center", justifyContent: "center" }} title="Cart">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" width="20" height="20">
                 <path d="M3 4h2l2.2 12.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 8H6" />
@@ -153,7 +154,7 @@ export default function Navbar({ active }) {
             <Link to="/shop" onClick={closeMobileMenu}>Shop</Link>
             <Link to="/journal" onClick={closeMobileMenu}>Journal</Link>
             {isCustomer && <Link to="/wishlist" onClick={closeMobileMenu}>Wishlist {count > 0 ? "" : ""}</Link>}
-            {isCustomer && <Link to="/cart" onClick={closeMobileMenu}>Cart {count > 0 ? `(${count})` : ""}</Link>}
+            {!isStaff && <Link to="/cart" onClick={closeMobileMenu}>Cart {count > 0 ? `(${count})` : ""}</Link>}
             {isCustomer && <Link to="/account" onClick={closeMobileMenu}>My Account</Link>}
             {user?.is_admin && <Link to="/admin" onClick={closeMobileMenu}>Admin Dashboard</Link>}
             {user?.is_rider && <Link to="/rider" onClick={closeMobileMenu}>My Deliveries</Link>}

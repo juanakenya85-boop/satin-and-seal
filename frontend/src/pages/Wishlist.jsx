@@ -23,9 +23,9 @@ export default function Wishlist() {
     load();
   }
 
-  async function handleAdd(productId) {
+  async function handleAdd(product) {
     try {
-      await addItem(productId, 1);
+      await addItem(product, 1);
     } catch (e) {
       setError(e.message);
     }
@@ -55,12 +55,12 @@ export default function Wishlist() {
               <div key={item.id} style={{ background: "var(--card)", border: "1px solid var(--line)", borderRadius: 2, overflow: "hidden" }}>
                 <Link to={`/product/${item.product.id}`} style={{
                   height: 180, display: "flex", alignItems: "center", justifyContent: "center", position: "relative",
-                  background: item.product.image_url ? undefined : "linear-gradient(155deg,#3a2540,#241a2a)", overflow: "hidden"
+                  background: item.product.image_url ? undefined : "linear-gradient(155deg,#FF6FA5,#7B3FF2)", overflow: "hidden"
                 }}>
                   {item.product.image_url ? (
                     <img src={resolveImageUrl(item.product.image_url)} alt={item.product.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   ) : (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#E4C3C7" strokeWidth="1.3" width="48" height="48">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="1.3" width="48" height="48">
                       <path d="M12 21c-4-2.6-8-6-8-10.4A4.6 4.6 0 0112 6a4.6 4.6 0 018 4.6C20 15 16 18.4 12 21z" />
                     </svg>
                   )}
@@ -80,7 +80,7 @@ export default function Wishlist() {
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" width="13" height="13" style={{ margin: "auto" }}><path d="M18 6L6 18M6 6l12 12" /></svg>
                       </button>
                       {item.product.quantity > 0 && (
-                        <button onClick={() => handleAdd(item.product.id)} title="Add to cart" className="btn btn-primary" style={{ width: 32, height: 32, padding: 0, borderRadius: "50%" }}>
+                        <button onClick={() => handleAdd(item.product)} title="Add to cart" className="btn btn-primary" style={{ width: 32, height: 32, padding: 0, borderRadius: "50%" }}>
                           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="14" height="14"><path d="M12 5v14M5 12h14" /></svg>
                         </button>
                       )}
@@ -94,7 +94,7 @@ export default function Wishlist() {
       </div>
 
       <footer style={{ borderTop: "1px solid var(--line)", padding: "32px 0", textAlign: "center", fontSize: 12.5, color: "var(--muted)" }}>
-        &copy; 2026 Satin & Seal, Nairobi. 18+ only.
+        &copy; 2026 Pleasure Pop, Nairobi. 18+ only.
       </footer>
     </div>
   );

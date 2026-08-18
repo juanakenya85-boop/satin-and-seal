@@ -16,9 +16,9 @@ def send_password_reset_email(to_email, reset_link):
     smtp_port = int(os.getenv("SMTP_PORT", "587"))
     smtp_username = os.getenv("SMTP_USERNAME")
     smtp_password = os.getenv("SMTP_PASSWORD")
-    from_email = os.getenv("SMTP_FROM_EMAIL", "no-reply@satinandseal.co.ke")
+    from_email = os.getenv("SMTP_FROM_EMAIL", "no-reply@pleasurepop.co.ke")
 
-    subject = "Reset your Satin & Seal password"
+    subject = "Reset your Pleasure Pop password"
     body = (
         f"We received a request to reset your password.\n\n"
         f"Click the link below to choose a new one. This link expires in 1 hour.\n\n"

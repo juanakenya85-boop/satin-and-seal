@@ -106,6 +106,8 @@ export const api = {
 
   // orders
   checkout: (payload) => request("/orders/checkout", { method: "POST", body: payload, auth: true }),
+  guestCheckout: (payload) => request("/orders/guest-checkout", { method: "POST", body: payload }),
+  getGuestOrder: (id, email) => request(`/orders/guest/${id}?email=${encodeURIComponent(email)}`),
   getOrders: () => request("/orders", { auth: true }),
   getOrder: (id) => request(`/orders/${id}`, { auth: true }),
 

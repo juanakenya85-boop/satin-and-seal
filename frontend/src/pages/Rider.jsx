@@ -32,7 +32,7 @@ export default function Rider() {
       <header style={{ borderBottom: "1px solid var(--line)", padding: "20px 0" }}>
         <div className="wrap" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <div style={{ width: 34, height: 34, borderRadius: "50%", background: "var(--bg-alt)", border: "1px solid var(--gold)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Fraunces, serif", fontStyle: "italic", fontSize: 17 }}>S</div>
+            <div style={{ width: 34, height: 34, borderRadius: "50%", background: "var(--bg-alt)", border: "1px solid var(--gold)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Fraunces, serif", fontStyle: "italic", fontSize: 17 }}>P</div>
             <div style={{ fontFamily: "Fraunces, serif", fontSize: 19, fontWeight: 600 }}>My Deliveries</div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>

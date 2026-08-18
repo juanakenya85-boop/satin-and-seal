@@ -68,7 +68,7 @@ def create_post():
         excerpt=data.get("excerpt", "").strip(),
         content=data.get("content", "").strip(),
         cover_image_url=data.get("cover_image_url"),
-        author=data.get("author", "Satin & Seal Team").strip() or "Satin & Seal Team",
+        author=data.get("author", "Pleasure Pop Team").strip() or "Pleasure Pop Team",
         is_published=bool(data.get("is_published", True)),
     )
     db.session.add(post)

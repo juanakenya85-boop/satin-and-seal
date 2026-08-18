@@ -32,8 +32,8 @@ export default function Cart() {
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               {items.map((item) => (
                 <div key={item.id} className="line-item-row" style={{ background: "var(--card)", border: "1px solid var(--line)", borderRadius: 8, padding: 18 }}>
-                  <div style={{ width: 76, height: 76, borderRadius: 6, flexShrink: 0, background: "linear-gradient(155deg,#3a2540,#241a2a)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#E4C3C7" strokeWidth="1.3" width="30" height="30">
+                  <div style={{ width: 76, height: 76, borderRadius: 6, flexShrink: 0, background: "linear-gradient(155deg,#FF6FA5,#7B3FF2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="1.3" width="30" height="30">
                       <path d="M12 21c-4-2.6-8-6-8-10.4A4.6 4.6 0 0112 6a4.6 4.6 0 018 4.6C20 15 16 18.4 12 21z" />
                     </svg>
                   </div>
@@ -99,7 +99,7 @@ function DeliveryOption({ label, fee, active, onClick }) {
     <div onClick={onClick} style={{
       display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 14px",
       border: `1px solid ${active ? "var(--rose)" : "var(--line)"}`, borderRadius: 2, marginBottom: 8, cursor: "pointer",
-      background: active ? "rgba(201,138,147,0.06)" : "transparent"
+      background: active ? "rgba(255,62,127,0.06)" : "transparent"
     }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13.5 }}>
         <div style={{ width: 16, height: 16, borderRadius: "50%", border: `1.5px solid ${active ? "var(--rose)" : "var(--line)"}`, position: "relative" }}>
